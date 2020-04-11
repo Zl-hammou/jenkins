@@ -35,8 +35,10 @@ pipeline {
 
     stage('Deploy App') {
       steps {
-        script {
-          kubernetesDeploy(configs: "myweb.yaml", kubeconfigId: "mykubeconfig")
+        script 
+          sh "chmod a+x changeTag.sh"
+		      sh "./changeTag.sh $BUILD_NUMBER"
+		      kubernetesDeploy(kubeconfigId: 'mykubeconfig', configs: 'mywebtagVersion.yml')
         }
       }
     }
