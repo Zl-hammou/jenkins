@@ -6,7 +6,7 @@ metadata:
     app: myweb
   name: myweb
 spec:
-  replicas: 6
+  replicas: 2
   selector:
     matchLabels:
       app: myweb
@@ -28,11 +28,12 @@ metadata:
     app: myweb
   name: myweb
 spec:
+  loadBalancerIP: 10.7.17.120
   ports:
-  - nodePort: 32223
+  - name: http
     port: 80
     protocol: TCP
     targetPort: 80
   selector:
     app: myweb
-  type: NodePort
+  type: LoadBalancer
